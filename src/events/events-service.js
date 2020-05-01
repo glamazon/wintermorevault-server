@@ -2,7 +2,7 @@ const xss = require('xss');
 
 const EventsService = {
 	getAllEvents(db) {
-		return db.from('wintermorevault_events AS art').select('art.id', 'art.artist', 'art.date');
+		return db.from('wintermorevault_events AS art').select('art.id', 'art.artist', 'art.date', 'art.notes');
 	},
 
 	getById(db, id) {
@@ -49,14 +49,7 @@ const EventsService = {
 			id: event.id,
 			artist: xss(event.artist),
 			date: new Date(event.date),
-			author: {
-				id: author.id,
-				user_name: author.user_name,
-				full_name: author.full_name,
-				nickname: author.nickname,
-				date: new Date(author.date),
-				date_modified: new Date(author.date_modified) || null
-			}
+		notes: xss(event.notes)
 		};
 	},
 

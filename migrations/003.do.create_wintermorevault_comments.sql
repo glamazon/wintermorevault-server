@@ -5,5 +5,5 @@ CREATE TABLE wintermorevault_comments (
     event_id INTEGER
         REFERENCES wintermorevault_events(id) ON DELETE CASCADE NOT NULL,
     user_id INTEGER
-        REFERENCES wintermorevault_users(id) ON DELETE CASCADE NOT NULL
+        REFERENCES users(id) ON DELETE CASCADE NOT NULL
 );
