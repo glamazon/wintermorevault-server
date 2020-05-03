@@ -1,8 +1,9 @@
 const xss = require('xss');
 
 const EventsService = {
-	getAllEvents(db) {
-		return db.from('wintermorevault_events AS art').select('art.id', 'art.artist', 'art.date', 'art.notes');
+	getAllEvents(db, user_id) {
+		return db.from('wintermorevault_events AS art').select('art.id', 'art.artist', 'art.date', 'art.notes')
+		.where({user_id})
 	},
 
 	getById(db, id) {

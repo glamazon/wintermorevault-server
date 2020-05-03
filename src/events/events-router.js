@@ -6,9 +6,10 @@ const eventsRouter = express.Router()
 const jsonBodyParser = express.json()
 
 eventsRouter
-  .route('/')
-  .get((req, res, next) => {
-    EventsService.getAllEvents(req.app.get('db'))
+.use(requireAuth)  
+.route('/')
+    .get((req, res, next) => {
+    EventsService.getAllEvents(req.app.get('db'), req.user.id)
       .then(events => {
         res.json(events.map(EventsService.serializeEvent))
       })
@@ -17,7 +18,7 @@ eventsRouter
   .post(jsonBodyParser, (req, res, next) => {
     const { concert, date, notes } = req.body
     EventsService.insertEvent(req.app.get('db'),
-    { artist:concert, date, notes })
+    { artist:concert, date, notes, user_id: req.user.id })
     .then(event=>res.json(event))
   })
 
