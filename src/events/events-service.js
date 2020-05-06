@@ -27,7 +27,6 @@ const EventsService = {
                   usr.id,
                   usr.user_name,
                   usr.full_name,
-                  usr.nickname,
                   usr.date,
                   usr.date_modified
               ) tmp)
@@ -65,7 +64,6 @@ const EventsService = {
 				id: user.id,
 				user_name: user.user_name,
 				full_name: user.full_name,
-				nickname: user.nickname,
 				date: new Date(user.date),
 				date_modified: new Date(user.date_modified) || null
 			}
