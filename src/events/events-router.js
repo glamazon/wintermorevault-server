@@ -20,6 +20,8 @@ eventsRouter
     EventsService.insertEvent(req.app.get('db'),
     { artist:concert, date, notes, user_id: req.user.id })
     .then(event=>res.json(event))
+  .catch(next)
+
   })
 
 
@@ -53,11 +55,16 @@ eventsRouter.route('/:event_id/comments/')
 
 /* async/await syntax for promises */
 async function checkEventExists(req, res, next) {
-  try {
-    const event = await EventsService.getById(
+   
+
+const event = await EventsService.getById(
       req.app.get('db'),
-      req.params.event_id
+      req.params.event_id,
+      req.user.id
     )
+
+
+
 
     if (!event)
       return res.status(404).json({
@@ -66,9 +73,9 @@ async function checkEventExists(req, res, next) {
 
     res.event = event
     next()
-  } catch (error) {
+ /*  } catch (error) {
     next(error)
   }
-}
+} */
 
 module.exports = eventsRouter

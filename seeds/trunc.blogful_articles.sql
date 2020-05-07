@@ -1,5 +1,4 @@
 TRUNCATE
-  blogful_comments,
-  blogful_articles,
-  blogful_users
+  users,
+  wintermorevault_events,
   RESTART IDENTITY CASCADE;

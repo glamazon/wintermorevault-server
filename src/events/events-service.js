@@ -3,12 +3,20 @@ const xss = require('xss');
 const EventsService = {
 	getAllEvents(db, user_id) {
 		return db.from('wintermorevault_events AS art').select('art.id', 'art.artist', 'art.date', 'art.notes')
-		.where({user_id})
+		.where('art.user_id', user_id)
 	},
 
-	getById(db, id) {
-		return EventsService.getAllEvents(db).where('art.id', id).first();
+	
+
+
+getById(db, id, user_id) {
+		return EventsService.getAllEvents(db, user_id).where('id', id).first();
 	},
+
+
+
+
+
 	deleteEvent(db, id) {
 		return db('wintermorevault_events').where({ id }).del();
 	},
