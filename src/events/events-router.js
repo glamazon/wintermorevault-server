@@ -55,27 +55,20 @@ eventsRouter.route('/:event_id/comments/')
 
 /* async/await syntax for promises */
 async function checkEventExists(req, res, next) {
-   
-
-const event = await EventsService.getById(
-      req.app.get('db'),
-      req.params.event_id,
-      req.user.id
-    )
-
-
-
-
-    if (!event)
-      return res.status(404).json({
-        error: `Event doesn't exist`
-      })
-
-    res.event = event
-    next()
- /*  } catch (error) {
+  try {
+    const event = await EventsService.getById(
+          req.app.get('db'),
+          req.params.event_id,
+          req.user.id
+        )
+        if (!event)
+          return res.status(404).json({
+            error: `Event doesn't exist`
+          })
+        res.event = event
+        next()
+  } catch (error) {
     next(error)
   }
-} */
-
+} 
 module.exports = eventsRouter
